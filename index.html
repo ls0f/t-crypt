@@ -37,7 +37,12 @@
             var expression = document.getElementById("expression").value;
             var eval_exp = user_vars + ";" + expression;
             console.log(eval_exp);
-            var ret = eval(eval_exp);
+            try{
+                var ret = eval(eval_exp);
+            }catch(err){
+                alert(err);
+                return
+            }
             document.getElementById("ret").value = ret;
             console.log(ret);
         }
