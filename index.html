@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/gh/emn178/js-sha1/build/sha1.min.js"></script>
+    <script src="https://blueimp.github.io/JavaScript-MD5/js/md5.js"></script>
+    
+</head>
+<body>
+    <div class="container-fluid">
+    
+        变量:<textarea type="textarea" id="user_vars"   class="form-control" ></textarea>
+        表达式 :<textarea type="textarea" id="expression"   class="form-control"></textarea>
+        结果:<textarea type="textarea" id="ret" readonly class="form-control"> </textarea> <p></p>
+        <input type="button" value="生成" onclick="button_click()"></<input> </p></p>
+        <input type="button" value="清空" onclick="clear_text()"></<input>
+    </div>
+    <script type="text/javascript">
+        function SHA1(key){
+            return sha1(key).toUpperCase()
+        }
+        function MD5(key){
+            return md5(key).toUpperCase()
+        }
+        var base64 = window.btoa;
+        var Base64 = window.btoa;
+        function button_click(){
+            var user_vars = document.getElementById("user_vars").value;
+            var expression = document.getElementById("expression").value;
+            var eval_exp = user_vars + ";" + expression;
+            console.log(eval_exp);
+            var ret = eval(eval_exp);
+            document.getElementById("ret").value = ret;
+            console.log(ret);
+        }
+
+        function clear_text(){
+            document.getElementById("user_vars").value = "";
+            document.getElementById("expression").value = "";
+            document.getElementById("ret").value = "";
+        }
+
+        function init() {
+            document.getElementById("user_vars").value = `
+            a=1;b=2;c=3;
+            `.trim();
+            document.getElementById("expression").value = `
+            base64(md5(a) + MD5(a) + sha1(b) + SHA1(b))
+            `.trim();
+            button_click();
+        }
+
+        init();
+    </script>
+</body>
+</html>
